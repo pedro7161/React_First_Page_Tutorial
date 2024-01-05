@@ -4,18 +4,19 @@ import Navbar from './Navbar/Navbar';
 import List from './List/List';
 import './App.css';
 import { read } from 'fs';
+import { AppContainer } from './context/AppContext';
 
 type User = {
   name: string;
   email: string;
 }
 
-const TodoList = ({text}: any) => {
+const TodoList = () => {
   return (
     <>
     
-   <List items={[text]} />
-   
+   <List items={[]} />
+
     </>
   )
 }
@@ -36,11 +37,14 @@ const App = () => {
       setUser([])
     }
     if (text === "List") {
-      TodoList(["List",true,()=>{}])
+      TodoList()
     }
   }, [text])
+
+ 
   return (
     <>
+    <AppContainer>
       <Navbar items={[
         {
           text: "Home", action: () => (
@@ -88,9 +92,10 @@ const App = () => {
         )}
         {text === "List" && (
           <>
-            <TodoList text={text} />  
+            <TodoList />  
             </>)}
       </>
+      </AppContainer>
     </>
   );
 }
